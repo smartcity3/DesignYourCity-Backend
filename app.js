@@ -10,7 +10,7 @@ var project_api = require('./routes/projects_api')
 var user_api = require('./routes/user_api')
 var bodyParser = require('body-parser');
 
-app.user(cors())
+app.use(cors())
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
