@@ -12,4 +12,4 @@ var IdeaSchema = new Schema({
 
 var Idea = mongoose.model('Idea', IdeaSchema);
 
-module.exports = model
+module.exports = Idea
