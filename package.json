@@ -17,7 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.5.6"
+    "mongoose": "^5.5.6",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "1.0.0-beta.26"
   },
   "devDependencies": {
     "apidoc": "^0.17.7",
