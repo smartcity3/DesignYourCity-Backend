@@ -103,3 +103,5 @@ typings/
 
 # apidocjs
 apidoc
+
+.DS_Store

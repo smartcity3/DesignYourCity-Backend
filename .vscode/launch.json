@@ -12,7 +12,10 @@
             "program": "${workspaceFolder}/app.js",
             "restart": true,
             "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "env": {
+                "MONGO_URI": "mongodb+srv://dev:aITFcb3WumywlTlA@cluster0-7cs5b.gcp.mongodb.net/dev"
+            }
         }
     ]
 }
