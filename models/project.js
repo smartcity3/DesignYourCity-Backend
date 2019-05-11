@@ -1,3 +1,19 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var ProjectSchema = new Schema({
+    title: String,
+    author: String,
+    description: String,
+    category: String,
+    votes: { positive: Number, negative: Number },
+    post_date: { type: Date, default: Date.now },
+    end_date: { type: Date, default: Date.now },
+    location: String
+});
+
+var Project = mongoose.model('Project', ProjectSchema);
+
 const projects = [
     {
         id: "1",
@@ -33,5 +49,6 @@ const projects = [
 ]
 
 module.exports = {
-    projects
+    projects,
+    Project
 }
