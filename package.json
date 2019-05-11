@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "docs": "apidoc -i routes/ -o apidoc/ -t apidoc-template/"
   },
   "keywords": [
     "decit",
@@ -18,6 +19,11 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "nodemon": "^1.19.0"
+  },
+  "apidoc": {
+    "title": "DECIT - Design your City API",
+    "url": "https://api.decit.com/v1"
   }
 }
