@@ -4,11 +4,13 @@ const router = express.Router()
 const port = 3000
 const mongoose = require('mongoose');
 const MONGO_URI = process.env['MONGO_URI']
+const cors = require('cors')
 
 var project_api = require('./routes/projects_api')
 var user_api = require('./routes/user_api')
 var bodyParser = require('body-parser');
 
+app.user(cors())
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
