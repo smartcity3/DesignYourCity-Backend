@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const router = express.Router()
 const port = 3000
+const mongoose = require('mongoose');
+const MONGO_URI = process.env['MONGO_URI']
 
 var project_api = require('./routes/projects_api')
 var user_api = require('./routes/user_api')
@@ -16,5 +18,8 @@ router.use('/user', user_api)
 app.use(router)
 
 app.listen(port,
-    () => console.log(`DECIT API listening on port ${port}!`)
+    () => {
+        console.log(`DECIT API listening on port ${port}!`)
+        mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+    }
 )
