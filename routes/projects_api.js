@@ -1,44 +1,85 @@
 var express = require('express')
 var router = express.Router();
-var model = require('../models/project')
+var model = require('../models/project').Project
 
 // Route to retieve projects ordered by latest
 router.get('/', (req, res, next) => {
-    // TODO: call mongo query here
+    var query = model.find({})
 
-    res.send({
-        projects: model.projects
-    })
+    query.exec((err, projects) => {
+        if (err) {
+            return next(new Error(err))
+        }
+
+        res.send(projects);
+    });
 })
 
 // route to create new project
 router.post('/', (req, res, next) => {
-    // TODO: call mongo query here
+    var project = new model(req.body)
 
-    model.projects.push(req.body)
+    project.save((err) => {
+        if (err) {
+            return next(new Error(err))
+        }
 
-    res.status(200).send(req.params)
+        res.send(project)
+    })
 })
 
 // route to retrieve a specific project
 router.get('/:id', (req, res, next) => {
-    // TODO: call mongo query here
-    
-    res.json(
-        model.projects.find(item => item.id == req.params.id)
-    )
+    model.findById(req.params['id'], (err, project) => {
+        res.send(project)
+    })
 })
 
-// route to vote for a specific project
-router.post('/:id/vote', (req, res, next) => {
-    // TODO: call mongo query here
-
-    model.projects.find(item => {
-        if (item.id === req.params.id) {
+// route to upvote for a specific project
+router.get('/:id/upvote', (req, res, next) => {
+    model.findById(req.params['id'], (err, project) => {
+        if (err) {
+            return next(new Error(err))
         }
-        item.voting
+
+        if (project) {
+            project.votes.positive += 1
+            project.save((err) => {
+                if (err) {
+                    return next(new Error(err))
+                }
+
+                res.send(project)
+            })
+        } else {
+            res.status(404).send()
+        }
+
     })
-    res.send()
+})
+
+// route to downvote for a specific project
+router.get('/:id/downvote', (req, res, next) => {
+    model.findById(req.params['id'], (err, project) => {
+        if (err) {
+            return next(new Error(err))
+        }
+
+        if (project) {
+
+            project.votes.negative += 1
+            project.save((err) => {
+                if (err) {
+                    return next(new Error(err))
+                }
+
+                res.send(project)
+            })
+        } else {
+            res.status(404).send()
+        }
+
+    })
 })
 
 // route to fund a project
@@ -56,7 +97,7 @@ router.post('/:id/fund', (req, res, next) => {
 // route to retrieve project bakers
 router.post('/:id/bakers', (req, res, next) => {
     // TODO: call mongo query here
-    
+
     model.projects.find(item => {
         if (item.id === req.params.id) {
         }

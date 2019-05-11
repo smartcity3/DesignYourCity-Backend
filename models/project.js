@@ -6,7 +6,10 @@ var ProjectSchema = new Schema({
     author: String,
     description: String,
     category: String,
-    votes: { positive: Number, negative: Number },
+    votes: {
+        positive: { type: Number, default: 0 },
+        negative: { type: Number, default: 0 }
+    },
     post_date: { type: Date, default: Date.now },
     end_date: { type: Date, default: Date.now },
     location: String
